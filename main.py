@@ -182,10 +182,8 @@ class Image:
                 if len(labels) == 0:
                     continue
                 else:
-
                     if 0 in labels:
                         temp_frame_elephant, temp_results_elephant, highest_confidence_elephant, date_time_elephant = self.getHighestConfidence(0, image_frame, results, labels, cordinates, highest_confidence_elephant, date_time_elephant, temp_frame_elephant, temp_results_elephant)
-                    
                     if 1 in labels:
                         temp_frame_human, temp_results_human, highest_confidence_human, date_time_human = self.getHighestConfidence(1, image_frame, results, labels, cordinates, highest_confidence_human, date_time_human, temp_frame_human, temp_results_human)
 
@@ -232,12 +230,16 @@ class Image:
                 image_confidence = int(cordinates[object][4]*100)
                 if object_code == 0:
                     if image_confidence > self.elephant_confidence_threshold:
+                        temp_elephant_path = "./Resources/temp/images/elephant/Image_" + time.strftime("%Y_%m_%d_%H_%M_%S") + ".jpg"
+                        cv2.imwrite(temp_elephant_path,image_frame)
                         if image_confidence > current_highest_confidence:
                             date_time = time.strftime("%Y_%m_%d_%H_%M_%S")
                             current_highest_confidence = image_confidence
                             return image_frame, results, current_highest_confidence, date_time
                 elif object_code == 1:
                     if image_confidence > self.human_confidence_threshold:
+                        temp_human_path = "./Resources/temp/images/human/Image_" + time.strftime("%Y_%m_%d_%H_%M_%S") + ".jpg"
+                        cv2.imwrite(temp_human_path,image_frame)
                         if image_confidence > current_highest_confidence:
                             date_time = time.strftime("%Y_%m_%d_%H_%M_%S")
                             current_highest_confidence = image_confidence
