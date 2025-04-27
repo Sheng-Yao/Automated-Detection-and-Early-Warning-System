@@ -148,6 +148,8 @@ class Image:
             source="local",  # This ensures it's loading from a local file
             force_reload=True  # Clears cache in case of corruption
         )
+        self.human_confidence_threshold = CONFIG['image']['human_confidence_threshold']
+        self.elephant_confidence_threshold = CONFIG['image']['elephant_confidence_threshold']
 
     def annotation_setup(self):
         self.font = CONFIG['image']['font']
@@ -228,10 +230,18 @@ class Image:
         for object in range(len(labels)):
             if labels[object - 1] == object_code:
                 image_confidence = int(cordinates[object][4]*100)
-                if image_confidence > current_highest_confidence:
-                    date_time = time.strftime("%Y_%m_%d_%H_%M_%S")
-                    current_highest_confidence = image_confidence
-                    return image_frame, results, current_highest_confidence, date_time
+                if object_code == 0:
+                    if image_confidence > self.elephant_confidence_threshold:
+                        if image_confidence > current_highest_confidence:
+                            date_time = time.strftime("%Y_%m_%d_%H_%M_%S")
+                            current_highest_confidence = image_confidence
+                            return image_frame, results, current_highest_confidence, date_time
+                elif object_code == 1:
+                    if image_confidence > self.human_confidence_threshold:
+                        if image_confidence > current_highest_confidence:
+                            date_time = time.strftime("%Y_%m_%d_%H_%M_%S")
+                            current_highest_confidence = image_confidence
+                            return image_frame, results, current_highest_confidence, date_time
         return previous_frame, previous_results, current_highest_confidence, date_time             
 
     def imageDetection(self):
