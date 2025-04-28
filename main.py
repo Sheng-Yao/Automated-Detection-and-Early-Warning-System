@@ -1,4 +1,4 @@
-
+###################################################################  Modules  ###################################################################
 import time
 # Logging module
 import logging
@@ -34,6 +34,7 @@ from gpiozero import MotionSensor
 import busio
 import adafruit_ads1x15.ads1115 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
+###################################################################  Modules  ###################################################################
 
 # Configure logging
 logging.basicConfig(
@@ -44,7 +45,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger("System")
 
-
+###################################################################  CONFIG  ###################################################################
 CONFIG = {
     "camera": {
         "resolution": (640,640),
@@ -95,9 +96,10 @@ CONFIG = {
         "sync_word": 0x14
     }
 }
+###################################################################  CONFIG  ###################################################################
+
 
 ###################################################################   Class   ###################################################################
-
 class LoRa:
     def __init__(self):
         self.lora = SX127x(LoRaSpi(0,0),LoRaGpio(0,23),LoRaGpio(0,22))
@@ -657,7 +659,7 @@ if __name__ == '__main__':
     logger.info('System setup initiated')
     print('System setup initiated')
 
-    # pir = MotionSensor(17)
+    pir = MotionSensor(17)
     camera = Image()
     skipping_timer = camera.updateTimer()
     logger.info('Camera initialized | Resolution: ' + str(camera.resolution))
@@ -707,18 +709,19 @@ if __name__ == '__main__':
                 logger.info('Battery level: ' + battery.get_battery_level(battery.channel.voltage) + '%')
                 print('Battery level: ' + battery.get_battery_level(battery.channel.voltage) + '%')
 
-            # if pir.triggered:
-            #     isElephantDetected = True
-
             image_confidence = 0
             is_sound_flow_done = False
 
             # Image flow (Include time skipping)
             skipping_timer, date_time, image_confidence = camera.imageFlow(skipping_timer)
 
-            
+            isPIRTriggered = False
+
+            if pir.triggered:
+                isPIRTriggered = True
+
             # Audio flow
-            if image_confidence != 0:
+            if image_confidence != 0 or isPIRTriggered:
                 stream = microphone.startRecording()
                 sound_frame = microphone.audioRecording(stream)
                 microphone.stopRecording(stream)
