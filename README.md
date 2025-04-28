@@ -1,4 +1,4 @@
-# Automated-Detection-and-Early-Warning-System
+![71eb5b29-f540-4b88-b138-1fa46fbd0f2e](https://github.com/user-attachments/assets/5ad3f32e-fb42-47c7-8790-cc2879854106)# Automated-Detection-and-Early-Warning-System
 
 <h2>Components</h2>
 
@@ -7,7 +7,9 @@
 
 <h2>Final Product</h2>
 
-![WhatsApp Image 2025-04-25 at 13 46 38](https://github.com/user-attachments/assets/27a53ace-1ebd-4b6c-ac74-60b6b1416701)
+![WhatsApp Image 2025-04-28 at 12 44 17](https://github.com/user-attachments/assets/ab5f8e6d-7374-4580-8808-d12f653a2003)
+![c596a824-ce03-4255-8f1d-1f6d7fa81914](https://github.com/user-attachments/assets/f707d825-21a1-4794-be5b-45bb3961a339)
+![71eb5b29-f540-4b88-b138-1fa46fbd0f2e](https://github.com/user-attachments/assets/af57919b-a02f-4353-bd13-0a4dfdaa6c8a)
 ![WhatsApp Image 2025-04-27 at 13 24 24](https://github.com/user-attachments/assets/07d76a31-416f-4e77-adf4-3360cc3856d9)
 
 <h2>Example Result</h2>
